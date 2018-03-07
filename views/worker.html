@@ -1,0 +1,50 @@
+<div class="add-input">
+  Pick a number <input type="text" class="add-input_value">
+  <button>Go!</button>
+</div>
+
+<div class="add-result">
+</div>
+
+body {
+  margin:3em;
+}
+
+.add-input {}
+
+.add-result {
+  margin:3em;
+  background-color:#ccc;
+  height: 200px;
+  width: 400px;
+  padding: 1em;
+  color:navy;
+  font-size: 1.5em;
+}
+
+//tutorial - https://www.html5rocks.com/en/tutorials/workers/basics/
+
+var worker = new Worker('https://s.codepen.io/tevko/pen/hwlnF.js');
+
+$('button').click(function() {
+  $('.add-result').empty();
+  var input = $('.add-input_value').val();
+  var inputToInteger = parseInt(input);
+  worker.postMessage(inputToInteger);
+});
+
+worker.addEventListener('message', function(e) {
+  $('.add-result').append(e.data);
+}, false);
+
+
+// in worker
+
+//this is the worker
+self.addEventListener('message', function(e) {
+  var addedNum = e.data + 1;
+  self.postMessage(
+    '<p>We Added 1 to the number you entered! </p><br>Your result was: ' +
+    addedNum
+  );
+}, false);

@@ -1,0 +1,120 @@
+// http://math.hws.edu/eck/jsdemo/OSCtest
+
+<script type="text/javascript">
+
+/*  Draws two sets of line segments radiating from a common center.  One
+ *  set is displaced from the position of the other set, resulting in a
+ *  Moire, or interference, pattern.  The second set of lines is animated;
+ *  it drifts at random within a limited region.
+ *     In this case, one set of lines is drawn to an "off-screen canvas"
+ *  That canvas is copied twice onto an on-screen canvas element to
+ *  produce the picture seen by the user.
+ *     This is a demonstration of using an off-screen canvas.  It would
+ *  actually make more sense to simply draw the two sets of lines
+ *  directly onto the on-screen canvas.
+ */
+
+var canvas;   // Reference to the canvas element that is part of the page.
+              //   This is the "on-screen canvas".
+
+var graphics; // A graphics context for drawing to the on-screen canvas.
+
+var OSC;   // A canvas element created programmatically, not part of the page.
+           //    This is the "off-screen canvas".
+
+var OSG;   // A graphics context for drawing to the off-screen canvas.
+
+var cornerX = 0;  // Horizontal amount by which second set of lines is offset.
+var cornerY = 0;  // Vertical amount by which second set of lines is offset.
+
+var velX, velY;   // The horizontal and vertical components of the velocity
+                  //   at which the second set of lines moves.  These values
+                  //   are added to (cornerX,cornerY) in each frame.  The
+                  //   velocity changes randomly from time to time, and the
+                  //   values are negated when the pattern moves more than
+                  //   50 pixels from its default position.
+
+/**
+ *  Draws a set of black line segments radiating from the point (200,200).
+ *  The lines are 200 pixels long, and they are equally spaced.
+ */
+function drawLines(g) {
+   g.beginPath();
+   var ct = 90;
+   for (var i = 0; i < ct; i++) {
+      var x = 200 + 200*Math.sin(2*i*Math.PI / ct);
+      var y = 200 + 200*Math.cos(2*i*Math.PI / ct);
+      g.moveTo(200,200);
+      g.lineTo(x,y);
+   }
+   g.stroke();
+}
+
+/**
+ *  Draws one frame in the animation.  Moves the second set of lines,
+ *  adjusting the velocity if necessary.  Draws the pattern.  And sets
+ *  a timeOut for the next frame.
+ */
+function drift() {
+
+   if (Math.random() < 0.02)  // randomize velocity in 1 out of 50 frames.
+      randomizeVelocity();
+
+   if (cornerX < -50)         // adjust signs of velocity components, if pattern has
+       velX = Math.abs(velX); //      moved more than 50 pixels in any direction.
+   if (cornerX > 50)
+       velX = -Math.abs(velX);
+   if (cornerY < -50)
+       velY = Math.abs(velY);
+   if (cornerY > 50)
+       velY = -Math.abs(velY);
+
+   cornerX += velX;  // Update the offset for the second set of lines.
+   cornerY += velY;
+
+   graphics.clearRect(0,0,400,400);         // Clear the on-screen canvas.
+   graphics.drawImage(OSC,0,0);             // Draw the off-screen canvas, with corner at (0,0).
+   graphics.drawImage(OSC,cornerX,cornerY); // Draw the off-screen canvas, with its offset.
+
+   setTimeout(drift,30); // Arrange for this function to be called again.
+}
+
+
+/**
+ *  Set the velocity to be at a random angle, with a random speed between 1 and 2.
+ *  (The velocity is a real number.)
+ */
+function randomizeVelocity() {
+   var angle = 2*Math.PI*Math.random();
+   var speed = 1 + 2*Math.random();
+   velX = speed*Math.cos(angle);
+   velY = speed*Math.sin(angle);
+}
+
+
+/**
+ *  A function to be executed when the program is loaded.  It creates the
+ *  off-screen canvas, gets graphics contexts for drawing to the two
+ *  canvases, and starts the animation.
+ */
+onload = function() {
+   canvas = document.getElementById("onscreencanvas");
+   if ( ! canvas || ! canvas.getContext ) {
+          // This browser apparently does not support canvasses since the canvas
+          // element has no getContext function.  Give up!
+      var message = document.getElementById("message");
+      message.innerHTML = "Oops... Sorry, your browser doesn't support the canvas element.";
+      return;
+   }
+   graphics = canvas.getContext("2d");
+   OSC = document.createElement("canvas");
+   OSC.width = 400;
+   OSC.height = 400;
+   OSG = OSC.getContext("2d");
+   graphics.strokeStyle = "#800";
+   OSG.strokeStyle = "#800";
+   drawLines(OSG);
+   randomizeVelocity();
+   setTimeout(drift, 30);  // Does the first frame of the animation in 30 milliseconds.
+};
+</script>
