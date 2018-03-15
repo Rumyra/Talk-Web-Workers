@@ -28,7 +28,7 @@ For each conference I branch, so just choose the correct branch for the correct 
 
 - [What is available in a worker](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Functions_and_classes_available_to_workers)
 - [Restaurant Menu Builder](https://restaurantmenubuilder.com/)
-- [50k sort array](https://afshinm.github.io/50k/)
+- [50k Sort Array](https://afshinm.github.io/50k/)
 - [Workers to Shared Memory](http://lucasfcosta.com/2017/04/30/JavaScript-From-Workers-to-Shared-Memory.html)
 - [Comlink](https://github.com/GoogleChromeLabs/comlink)
 - [Clooney](https://github.com/GoogleChromeLabs/clooney)
@@ -38,7 +38,6 @@ For each conference I branch, so just choose the correct branch for the correct 
 
 - [Web Audio Worklet Noise Example](https://googlechromelabs.github.io/web-audio-samples/audio-worklet/basic/noise-audio-param.html)
 - [Offscreen Canvas on MDN](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas)
-
 
 ## Get in touch
 
