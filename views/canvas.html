@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico" />
+  <link rel="stylesheet" type="text/css" href="assets/audio.css" />
+
+  <style type="text/css">
+  	canvas {background: white;}
+  </style>
+  <title>Offline canvas example</title>
+</head>
+
+<body>
+<div class="container">
+
+	<canvas></canvas>
+
+</div>
+
+<script type="text/javascript">
+
+  // grab some dom
+  const canvas = document.querySelector('canvas').getContext('bitmaprenderer');
+
+  console.log(canvas);
+
+  const offscreenCan = new OffscreenCanvas(50,50);
+  var twoD = offscreenCan.getContext('2d');
+
+  twoD.strokeStyle = 'blue';
+  twoD.beginPath()
+  twoD.moveTo(10,10);
+  twoD.lineTo(50,50);
+  twoD.closePath();
+  twoD.stroke();
+
+  var bitmap = offscreenCan.transferToImageBitmap();
+	canvas.transferFromImageBitmap(bitmap);
+
+</script>
+</body>
+
+</html>
+

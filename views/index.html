@@ -34,6 +34,8 @@
       display: none;
     }
     svg {width: 100vw; height: 100vh; padding:0px; margin:0px;}
+    .reveal h3 a {color:#8c4c6f;}
+    .reveal h3 a:hover {color:#acc486;}
   </style>
 
 </head>
@@ -134,7 +136,7 @@ $grey: #bebebe
           </aside>
         </section>
 
-        <section data-background-color="#ea8d88" data-background-image="media/shaun.gif">
+        <section data-background-color="#ea8d88" data-background-image="media/lemWalk.gif">
           <aside class="notes">
             <p>Cool</p>
           </aside>
@@ -205,7 +207,7 @@ var myWorker = new Worker('worker.js');
           </aside>
         </section>
 
-        <section data-background-color="#ea8d88" data-background-image="media/lemShrug.gif">
+        <section data-background-color="#ea8d88" data-background-image="media/lemDig.gif">
           <h1>Dedicated Workers</h1>
           <h1>Shared Workers</h1>
           <aside class="notes">
@@ -215,7 +217,7 @@ var myWorker = new Worker('worker.js');
           </aside>
         </section>
 
-        <section data-background-color="#ea8d88" data-background-image="media/lemShrug.gif">
+        <section data-background-color="#ea8d88" data-background-image="media/lemDie.gif">
           <h1>Terminating workers</h1>
           <h2>& Errors</h1>
           <aside class="notes">
@@ -223,7 +225,7 @@ var myWorker = new Worker('worker.js');
           </aside>
         </section>
 
-        <section data-background-color="#ea8d88" data-background-image="media/lemShrug.gif">
+        <section data-background-color="#ea8d88">
             <pre><code data-trim class="js">// error event
 var myWorker = new Worker('worker.js');
 
@@ -246,7 +248,7 @@ myWorker.terminate();
           </aside>
         </section>
 
-        <section data-background-color="#ea8d88" data-background-image="media/shaun.gif">
+        <section data-background-color="#ea8d88" data-background-image="media/lemWalk.gif">
           <aside class="notes">
             <p>Cool</p>
           </aside>
@@ -255,7 +257,10 @@ myWorker.terminate();
 
         <section data-background-color="#ea8d88">
           <h1>Pass some data</h1>
-            <pre><code data-trim class="js">// send worker a message
+            <pre><code data-trim class="js">// create a new worker
+var myWorker = new Worker('worker.js');
+
+// send worker a message
 myWorker.postMessage('Hey worker');
             </code></pre>
 
@@ -286,11 +291,8 @@ myWorker.addEventListener('message', function(e) {
           </aside>
         </section>
 
-        <section data-background-color="#ea8d88">
+        <section data-background-color="#ea8d88" data-background-image="media/lemAxe.gif">
           <h1>DEMO</h1>
-            <pre><code data-trim class="js">// error event
-var myWorker = new Worker('worker.js');
-            </code></pre>
           <aside class="notes">
             <p></p>
           </aside>
@@ -325,11 +327,20 @@ var myWorker = new Worker('worker.js');
         </section>
 
         <section data-background-color="#ea8d88">
+          <h1>Resources</h1>
+          <h3><a href="https://github.com/GoogleChromeLabs/comlink">https://github.com/GoogleChromeLabs/comlink</a></h3>
+          <h3><a href="https://github.com/GoogleChromeLabs/clooney">https://github.com/GoogleChromeLabs/clooney</a></h3>
+          <h3><a href="https://medium.com/@JoubranJad/running-fetch-in-a-web-worker-700dc33ac854">https://medium.com/@JoubranJad/running-fetch-in-a-web-worker-700dc33ac854</a></h3>
+          <aside class="notes">
+            <p>comlink aims to make the post message stuff more useable - rather than just writing post message all the time you can share vars</p>
+            <p>classes given to clooney will be instantiated and run inside a worker - class can not rely on it's surrounding scope -> could change workers are looking to support es6 modules</p>
+            <p>Running fetch in a worker - seems superfluous but there's an example none the less</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#acc486">
           <h1>Worklets</h1>
           <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Yup, that&#39;s right - basically worklets allow us to run something within a stage of a browser engine, and make sure developers can&#39;t access something that will make the world explode. It also allows us to do a few optimizations if needed, i.e. run on different thread, caching, etc</p>&mdash; Ian Kilpatrick (@bfgeek) <a href="https://twitter.com/bfgeek/status/956245937390628864?ref_src=twsrc%5Etfw">January 24, 2018</a></blockquote>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-          <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">worklets that fetch api data, worklets that serve as state-managers, worklets that access the browser db... exciting</p>&mdash; tjmonsi (@tjmonsi) <a href="https://twitter.com/tjmonsi/status/956310578393268225?ref_src=twsrc%5Etfw">January 24, 2018</a></blockquote>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
           <aside class="notes">
@@ -337,8 +348,14 @@ var myWorker = new Worker('worker.js');
           </aside>
         </section>
 
-        <section data-background-color="#8c4c6f">
+        <section data-background-color="#acc486">
           <h1>CSS Paint API</h1>
+          <pre><code data-trim class="css">.container {background-image: paint(spiral);}
+            </code></pre>
+
+            <pre><code data-trim class="js">// in our main script
+CSS.paintWorklet.addModule('scripts/spiral-orig.js');
+            </code></pre>
           <aside class="notes">
             <p>So this is all part of a bigger spec coming out called Houdini - it basically gives dveelopers lower level access to CSS</p>
             <p>In this case - this particular bit gives us the ability to paint a background - so we draw it on canvas and then push it as a background image to the css</p>
@@ -346,15 +363,16 @@ var myWorker = new Worker('worker.js');
           </aside>
         </section>
 
-        <section data-background-color="#8c4c6f">
+        <section data-background-color="#acc486" data-background-image="media/lemBuild.gif">
           <h1>Demo</h1>
           <aside class="notes">
             <p>Only works in canary</p>
           </aside>
         </section>
 
-        <section data-background-color="#8c4c6f">
+        <section data-background-color="#acc486">
           <h1>Web Audio Workets</h1>
+          <p>Put some code here</p>
           <aside class="notes">
             <p>So for as long as the Web Audio API specification has been out we've had this script processor node right - which has been depreciated, and we have been waiting for this</p>
             <p>A huge part of the audio api is processing data - audio data. If we do this on the main thread other things get in the way - and the way the audio api fixes this is by skipping. The ear does not like things going out of sync.</p>
@@ -362,7 +380,7 @@ var myWorker = new Worker('worker.js');
           </aside>
         </section>
 
-        <section data-background-color="#8c4c6f">
+        <section data-background-color="#acc486" data-background-image="media/lemClimb.gif">
           <h1>Demo</h1>
           <h3><a href="https://googlechromelabs.github.io/web-audio-samples/audio-worklet/">https://googlechromelabs.github.io/web-audio-samples/audio-worklet/</a></h3>
           <aside class="notes">
@@ -372,92 +390,65 @@ var myWorker = new Worker('worker.js');
           </aside>
         </section>
 
-        <section data-background-color="#8c4c6f">
-          <h1>Audio & Web</h1>
+        <section data-background-color="#acc486">
+          <h1>Offscreen Canvas</h1>
+          <pre><code data-trim class="js">const offscreenCan = new OffscreenCanvas(50,50);
+var twoD = offscreenCan.getContext('2d');
+
+twoD.strokeStyle = 'red';
+twoD.beginPath()
+twoD.moveTo(10,10);
+twoD.lineTo(50,50);
+twoD.closePath();
+twoD.stroke();
+
+var bitmap = offscreenCan.transferToImageBitmap();
+canvas.transferFromImageBitmap(bitmap);
+</code></pre>
           <aside class="notes">
-            <p>I know there are other codes out there</p>
-            <p>I know you can add javascript to max - I knwo you can do a lot of the art demos with processing. But you add a lot of stuff for very little gain</p>
-            <p>What comes out of the box with a browser is fascinating</p>
-            <p>I became a web developer 15 years ago after studying degree called Entertainment Technology - music tech, film, 3D, animation. Never in those early years did I think I'd be circling back around</p>
-            <p>Never did I think I would have the tools at my fingers tips to be building the software I'd be using - you can bet on other things, but I'm pretty happy I bet on the web</p>
+            <p>Totally worth a mention considering the VR enthusiast we have in the audience</p>
           </aside>
         </section>
 
-        <section data-background-color="#8c4c6f" data-state="no-visuals">
-          <h1>Go Forth&nbsp;&nbsp;|&nbsp;&nbsp;Make Noise</h1>
+        <section data-background-color="#acc486" data-background-image="media/lemScoop.gif">
+          <h1>Demo</h1>
+          <aside class="notes">
+            <p>Only works in canary</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#8c4c6f">
+          <h1>It's all interesting</h1>
+          <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">worklets that fetch api data, worklets that serve as state-managers, worklets that access the browser db... exciting</p>&mdash; tjmonsi (@tjmonsi) <a href="https://twitter.com/tjmonsi/status/956310578393268225?ref_src=twsrc%5Etfw">January 24, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+          <aside class="notes">
+            <p></p>
+          </aside>
+        </section>
+
+        <section data-background-color="#8c4c6f" data-background-image="media/livejs.jpg" >
+          <h1>It's all interesting</h1>
+          <aside class="notes">
+            <p></p>
+          </aside>
+        </section>
+
+        <section data-background-color="#8c4c6f" data-background-image="media/asia.jpg" >
+          <h1></h1>
+          <aside class="notes">
+            <p>I started down this path because I have a piece of software which I use to run visuals. It's all run locally, but it's written in JS - so I can control the functionality I have</p>
+            <p>I've run into performance problems - like big ones. I'm analysing audio, re-analysing, I'm redrawing.</p>
+            <p>I'm really interested in the media side of it</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#8c4c6f" data-background-image="media/lemBye.gif">
           <h1>Ruth John</h1>
           <h1>@Rumyra</h1>
+          <h3><a href="https://goo.gl/forms/YVgeXsg5L9DPdXy12">https://goo.gl/forms/YVgeXsg5L9DPdXy12</a></h3>
           <p>Thank You Very Much</p>
           <aside class="notes">
-            <p>Thank you very much, I'm Ruth John</p>
-            <p>All these examples you've seen are on codepen as part of codevember</p>
-            <p>Go have a relax and I hope you had a lovely conference!</p>
-          </aside>
-        </section>
-        <!-- conslusion -->
-        <!--  -->
-        <!-- support for music file types -->
-
-
-
-
-
-
-        <!-- <section data-background-color="#463c34">
-          <h1>Analyse sounds</h1>
-          <pre><code data-trim class="js">// frequency & time
-const analyserNode = context.createAnalyser();
-
-// larger for more resolution
-analyser.fftSize = 1024;
-
-var dataArray = new Uint8Array(2048);
-// pass values into dataArray
-analyser.getByteFrequencyData(dataArray);
-          </code></pre>
-          <aside class="notes">
-            <p>This is my all time favourite feature. No doubt!</p>
-            <p>We can anlayse frequency and time.</p>
-          </aside>
-        </section> -->
-
-
-        <!-- <section data-background-color="#ea8d88" data-background-image="media/library.jpg">
-          <h1>Audio Libraries</h1>
-          <aside class="notes">
-            <p>You're probably not gonna see much MIDI but audio is big in HTML games.</p>
-            <p>This was actually quite tricky for me. I don't play games and if you google there's loads of Audio games - but they're not necessarily web.</p>
-            <p>So I asked my friend.</p>
-          </aside>
-        </section> -->
-
-        <section data-background-color="#8c4c6f" class="lists">
-          <div class="list-right">
-            <h1>Resources</h1>
-            <ul>
-              <li><h2><a href="https://www.html5rocks.com/en/tutorials/audio/scheduling/">Chris Wilson: A Tale of Two Clocks</a></h2></li>
-              <li class="fragment fade-in"><h2><a href="https://www.html5rocks.com/en/tutorials/webaudio/intro/">Boris Smus: Getting Started with Web Audio API</a></h2></li>
-              <li class="fragment fade-in"><h2><a href="https://dev.opera.com/articles/drum-sounds-webaudio/">Chris Lowis: Sythesising Drum Sounds</a></h2></li>
-              <li class="fragment fade-in"><h2><a href="https://jakearchibald.com/2016/sounds-fun/">Jake Archibald: Sounds Fun</a></h2></li>
-            </ul>
-          </div>
-          <aside class="notes">
-            <p>As well as the libraries I mentioned earlier there's a few articles worth noting</p>
-            <p>Chris Wilson explains time really well</p>
-            <p>A couple of articles on using the api for game dev - boris smus on html5 rocks and one on MDN</p>
-          </aside>
-        </section>
-
-
-
-        <section data-background-color="#8c4c6f" data-state="no-visuals">
-          <h1>Credits</h1>
-          <h3>@jsoxford hack photo: @spikeheap</h3>
-          <h3>Apeggiator: https://codepen.io/jakealbaugh/pen/qNrZyw</h3>
-          <h3>Blokdust: https://blokdust.com/</h3>
-          <h3>Piano: https://www.patrik-huebner.com/portfolio-item/piano-3d-audio-reactive-typography/</h3>
-          <aside class="notes">
-
+            <p>Thank you for bearing with - there's a feedback form - anonymous, can pop the link in slack. I would like to get feedback now before I take this talk further</p>
           </aside>
         </section>
 

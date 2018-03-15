@@ -4,14 +4,15 @@ A talk about web workers, the what &amp; how, with a focus on workers in specs, 
 
 Versions of this talk have been seen at:
 
-- []()
+- [JS Oxford](https://jsoxford.com/2018-03-14-observations-and-workers/)
 
 ## About
 
-
+So to start (it's early days) I give an overview of workers, then talk about CSS Paint API, Web Audio Worklet and Offscreen Canvas.
 
 ## Videos
 
+N/A at this time
 
 ## Slides
 
@@ -23,13 +24,20 @@ For each conference I branch, so just choose the correct branch for the correct 
 
 ## Examples referenced within the talk
 
-- []()
+### Workers
 
-## Resources & Further Reading
+- [What is available in a worker](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Functions_and_classes_available_to_workers)
+- [Restaurant Menu Builder](https://restaurantmenubuilder.com/)
+- [50k sort array](https://afshinm.github.io/50k/)
+- [Workers to Shared Memory](http://lucasfcosta.com/2017/04/30/JavaScript-From-Workers-to-Shared-Memory.html)
+- [Comlink](https://github.com/GoogleChromeLabs/comlink)
+- [Clooney](https://github.com/GoogleChromeLabs/clooney)
+- [Fetch in a web worker](https://medium.com/@JoubranJad/running-fetch-in-a-web-worker-700dc33ac854)
 
-- []()
+### Worklets
 
-## Demos
+- [Web Audio Worklet Noise Example](https://googlechromelabs.github.io/web-audio-samples/audio-worklet/basic/noise-audio-param.html)
+- [Offscreen Canvas on MDN](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas)
 
 
 ## Get in touch

@@ -1,50 +1,43 @@
-<div class="add-input">
-  Pick a number <input type="text" class="add-input_value">
-  <button>Go!</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico" />
+  <link rel="stylesheet" type="text/css" href="assets/audio.css" />
+
+  <style type="text/css">
+    button {width: 50vw; margin: 40px auto;}
+  </style>
+  <title>Simple worker example</title>
+</head>
+
+<body>
+<div class="container">
+  <button>Say hello to worker</button>
 </div>
 
-<div class="add-result">
-</div>
+<script type="text/javascript">
 
-body {
-  margin:3em;
-}
+  // grab some dom
+  const button = document.querySelector('button');
 
-.add-input {}
+  // create new worker
+  var worker = new Worker('scripts/simple-worker.js');
 
-.add-result {
-  margin:3em;
-  background-color:#ccc;
-  height: 200px;
-  width: 400px;
-  padding: 1em;
-  color:navy;
-  font-size: 1.5em;
-}
+  // send data to worker
+  button.addEventListener('click', function(e) {
+    e.preventDefault;
+    worker.postMessage('Button said hello!');
+  }, false);
 
-//tutorial - https://www.html5rocks.com/en/tutorials/workers/basics/
+  worker.addEventListener('message', function(e) {
+    console.log(e.data);
+  }, false)
 
-var worker = new Worker('https://s.codepen.io/tevko/pen/hwlnF.js');
+</script>
+</body>
 
-$('button').click(function() {
-  $('.add-result').empty();
-  var input = $('.add-input_value').val();
-  var inputToInteger = parseInt(input);
-  worker.postMessage(inputToInteger);
-});
+</html>
 
-worker.addEventListener('message', function(e) {
-  $('.add-result').append(e.data);
-}, false);
-
-
-// in worker
-
-//this is the worker
-self.addEventListener('message', function(e) {
-  var addedNum = e.data + 1;
-  self.postMessage(
-    '<p>We Added 1 to the number you entered! </p><br>Your result was: ' +
-    addedNum
-  );
-}, false);

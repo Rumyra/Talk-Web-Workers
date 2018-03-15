@@ -16,8 +16,14 @@ app.set('view engine', 'html');
 app.get('/', (req, res) => {
   res.render('index');
 });
-app.get('/audio', (req, res) => {
-  res.render('audio');
+app.get('/worker', (req, res) => {
+  res.render('worker');
+});
+app.get('/canvas', (req, res) => {
+  res.render('canvas');
+});
+app.get('/paint', (req, res) => {
+  res.render('paint');
 });
 
 app.listen(process.env.PORT || 3000);

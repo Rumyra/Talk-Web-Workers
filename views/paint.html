@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico" />
+  <link rel="stylesheet" type="text/css" href="assets/audio.css" />
+
+  <style type="text/css">
+
+  	.container {
+      --smoothness: 3;
+      box-sizing: border-box;
+      margin: 10px; padding: 0px;
+      width: calc(100vw - 20px);
+      height: calc(100vh - 20px);
+      background-color: #111;
+      background-image: paint(spiral);
+    }
+  </style>
+  <title>CSS Paint API Example</title>
+</head>
+
+<body>
+<div class="container">
+
+</div>
+
+<script type="text/javascript">
+
+  // grab some dom
+  const screen = document.querySelector('.container');
+  console.log(screen);
+
+  CSS.paintWorklet.addModule('scripts/spiral-orig.js');
+
+</script>
+</body>
+
+</html>
+
