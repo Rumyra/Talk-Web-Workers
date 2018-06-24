@@ -41,3 +41,4 @@ jspm_packages
 
 # dsstore
 *.DS_Store
+public/.DS_Store
