@@ -72,30 +72,6 @@ $grey: #bebebe
           </aside>
         </section>
 
-        <section data-background-color="#8c4c6f" data-background-image="media/slack.png">
-          <h1>Ruth John&nbsp;&nbsp;|&nbsp;&nbsp;@Rumyra</h1>
-          <p>Hello</p>
-          <aside class="notes">
-            <p>Digital Oxford, jsoxford slack channel</p>
-          </aside>
-        </section>
-
-        <section data-background-color="#8c4c6f" data-background-image="media/summer.png">
-          <h1>Ruth John&nbsp;&nbsp;|&nbsp;&nbsp;@Rumyra</h1>
-          <p>Hello</p>
-          <aside class="notes">
-            <p>js oxford summer of hacks</p>
-          </aside>
-        </section>
-
-        <section data-background-color="#8c4c6f" data-background-image="media/gh.png">
-          <h1>Ruth John&nbsp;&nbsp;|&nbsp;&nbsp;@Rumyra</h1>
-          <p>Hello</p>
-          <aside class="notes">
-            <p>Well named pull requests on jsoxford website</p>
-          </aside>
-        </section>
-
         <section data-background-color="#8c4c6f">
           <h1>Ruth John&nbsp;&nbsp;|&nbsp;&nbsp;@Rumyra</h1>
           <p>Creative Engineer</p>
@@ -109,29 +85,31 @@ $grey: #bebebe
         </section>
 
         <section data-background-color="#8c4c6f">
-          <h1>Thanks for having me</h1>
-          <img src="media/jo.jpg" />
-          <img src="media/me.jpg" />
+          <h1>I teach!</h1>
+          <p>Develop Me_ - in Bristol - we're growing</p>
           <aside class="notes">
-            <p>It is wonderful to be talking along side Jo this evening... for a number of reasons but one because:</p>
+            <p>I'm a creative engineer, legacy web dev. I've been doing this for about 15 years</p>
+            <p>I'm a recognised Google Developer Expert in browser stuff and specifically audio and midi</p>
+            <p>I work for myself - always on the look out for new projects</p>
           </aside>
         </section>
 
-        <section data-background-color="#eee5c4" data-background-image="media/seren.png">
+        <section data-background-color="#8c4c6f">
+          <h1>Thanks for having me</h1>
+          <img src="media/michelle.jpg" width="400" />
+          <img src="media/me.jpg" width="400" />
           <aside class="notes">
-            <p>I know the organisers did not plan to have a IWD themed jsoxford, which is the best thing. That the community here didn't try. I think this is the first meetup I have spoken at with an all female line up at IWD where it was natural.</p>
-            <p>That, that's what it is about. That this is normal!</p>
+            <p>It is wonderful to be talking along side michelle this evening... the first time I did this talk was a few days after international womes day and I am still yet to do this talk in a line up that isn't exclusive made of women. So it's nice to know how that feels :)</p>
           </aside>
         </section>
 
         <section data-background-color="#ea8d88">
-          <h1>Web Workers</h1>
+          <h1>Web Workers & Worklets</h1>
           <h2>Full Disclosure</h2>
           <aside class="notes">
-            <p>Longest intro ever!</p>
-            <p>Web workers! yeah... let's start with the what, then the how, then what I really want to talk about which is owrkers in other specs.</p>
-            <p>This is a brand new talk - I have never done it before, it is a first version so it is not a shiny end conference talk.</p>
-            <p>I would luv afterwards (no q&a) afterwards to take feedback. What did you like, what didn't you like, could I have explained something better, was there anything you didn't understand</p>
+            <p>Web workers! yeah... let's start with the what, then the how, then what I really want to talk about which is workers in other specs.</p>
+            <p>This talk is not finished! Joke about slack here</p>
+            <p>I would luv afterwards (no q&a) to take feedback. What did you like, what didn't you like, could I have explained something better, was there anything you didn't understand</p>
             <p>Don't be scared I won't share that feedback, I will merely edit this talk</p>
           </aside>
         </section>
@@ -162,7 +140,7 @@ $grey: #bebebe
           <h1>Web Workers</h1>
           <aside class="notes">
             <p>Wouldn't it be cool if whilst that was going on, some of the things the browser had to do could happen else where, whilst the browser was still doing it's work.</p>
-            <p>Seperately and at the same time</p>
+            <p>Separately and at the same time</p>
             <p>That's what a web worker is - it take processing off the main thread, and puts it on another.</p>
             <p>Makes it multi threaded</p>
             <p>Now we'll talk about problems in a minute but let's take a look at how it works</p>
@@ -187,7 +165,7 @@ $grey: #bebebe
 var myWorker = new Worker('worker.js');
             </code></pre>
           <aside class="notes">
-            <p></p>
+            <p>So let's create a worker within out main javascript</p>
           </aside>
         </section>
 
@@ -201,6 +179,7 @@ var myWorker = new Worker('worker.js');
           <h3 class="fragment fade-in">Import scripts & create other workers</h3>
           <h3 class="fragment fade-in">List: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Functions_and_classes_available_to_workers">https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Functions_and_classes_available_to_workers</a></h3>
           <aside class="notes">
+            <p>It's all about not directly affecting the main page with a worker so...</p>
             <p>This means that window, navigator and parent objects are not available (self is)</p>
             <p>Neither is the DOM it is not thread safe</p>
             <p>But there is limited access to other APIs and methods</p>
@@ -272,6 +251,8 @@ self.addEventListener('message', function(e) {
   // send a message back
   self.postMessage('Hey main');
 }, false);
+
+// We could do self.onmessage('Hey worker' function...)
             </code></pre>
           <aside class="notes">
             <p>OK so we not only have to give the worker data but we also have to start it - this happens with the same thing - postmessage method</p>
@@ -292,7 +273,7 @@ myWorker.addEventListener('message', function(e) {
         </section>
 
         <section data-background-color="#ea8d88" data-background-image="media/lemAxe.gif">
-          <h1>DEMO</h1>
+          <h1>SIMPLE DEMO</h1>
           <aside class="notes">
             <p></p>
           </aside>
@@ -315,6 +296,13 @@ myWorker.addEventListener('message', function(e) {
           </aside>
         </section>
 
+        <section data-background-color="#ea8d88" data-background-image="media/lemAxe.gif">
+          <h1>COMPLEX DEMO</h1>
+          <aside class="notes">
+            <p></p>
+          </aside>
+        </section>
+
         <section data-background-color="#ea8d88">
           <h1>What??</h1>
           <h3>Data: Copied</h3>
@@ -322,7 +310,30 @@ myWorker.addEventListener('message', function(e) {
           <h3>Shared</h3>
           <h3><a href="http://lucasfcosta.com/2017/04/30/JavaScript-From-Workers-to-Shared-Memory.html">http://lucasfcosta.com/2017/04/30/JavaScript-From-Workers-to-Shared-Memory.html</a></h3>
           <aside class="notes">
-            <p></p>
+            <p>So in our example the data is copied over the worker.</p>
+            <p>You can transfer it, so the data isn't available on the main thread whilst it's in the worker. This improves performance with large data sets - we're talking megabytes of data, otherwise loosing the data from the main thread needs to be carefully considered.</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#ea8d88">
+          <h1>Listen for the data</h1>
+            <pre><code data-trim class="js">// transfer the data purlese
+myWorker.postMessage(bigData, [bigData]);
+            </code></pre>
+          <aside class="notes">
+            <p>Pretty simple to say you want to transfer the data</p>
+            <p>When you post the message just pass in the data you want to make transferable with an array as an argument, like thus</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#ea8d88">
+          <h1>sharedArrayBuffer</h1>
+            <!-- <pre><code data-trim class="js">// transfer the data purlese
+myWorker.postMessage(bigData, [bigData]);
+            </code></pre> -->
+          <aside class="notes">
+            <p>SharedArrayBuffer - ah the fire - so this was pulled because of spectre. It is available in Chrome 67 & I belive the latest FF behind flags.</p>
+            <p>Basically it's shared data, so multiple threads can see it. Main or workers - remember workers can talk to each other</p>
           </aside>
         </section>
 
@@ -350,6 +361,16 @@ myWorker.addEventListener('message', function(e) {
 
         <section data-background-color="#acc486">
           <h1>CSS Paint API</h1>
+          <h2><a href="https://houdini.glitch.me/">Spellbook</a></h2>
+          <aside class="notes">
+            <p>So this is all part of a bigger spec coming out called Houdini - it basically gives developers lower level access to CSS and the underlying technologies</p>
+            <p>So instead of the constraints of say flexbox - you can create your own flexbox. If you're not happy with the fact conic gradient isn't well supported yet, you can make it.</p>
+            <p>Very new, very experimental, will change</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#acc486">
+          <h1>CSS Paint API</h1>
           <pre><code data-trim class="css">.container {background-image: paint(spiral);}
             </code></pre>
 
@@ -357,16 +378,23 @@ myWorker.addEventListener('message', function(e) {
 CSS.paintWorklet.addModule('scripts/spiral-orig.js');
             </code></pre>
           <aside class="notes">
-            <p>So this is all part of a bigger spec coming out called Houdini - it basically gives dveelopers lower level access to CSS</p>
+            <p>So this is all part of a bigger spec coming out called Houdini - it basically gives developers lower level access to CSS</p>
             <p>In this case - this particular bit gives us the ability to paint a background - so we draw it on canvas and then push it as a background image to the css</p>
             <p>Only works in canary</p>
           </aside>
         </section>
 
         <section data-background-color="#acc486" data-background-image="media/lemBuild.gif">
-          <h1>Demo</h1>
+          <h1>Simple Demo</h1>
           <aside class="notes">
-            <p>Only works in canary</p>
+            <p>Explain</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#acc486" data-background-image="media/lemBuild.gif">
+          <h1>Less Simple Demo</h1>
+          <aside class="notes">
+            <p>Works in Chrome</p>
           </aside>
         </section>
 
@@ -383,6 +411,7 @@ CSS.paintWorklet.addModule('scripts/spiral-orig.js');
         <section data-background-color="#acc486" data-background-image="media/lemClimb.gif">
           <h1>Demo</h1>
           <h3><a href="https://googlechromelabs.github.io/web-audio-samples/audio-worklet/">https://googlechromelabs.github.io/web-audio-samples/audio-worklet/</a></h3>
+          <h3><a href="https://dsp.audio/editor/">https://dsp.audio/editor/</a></h3>
           <aside class="notes">
             <p>So for as long as the Web Audio API specification has been out we've had this script processor node right - which has been depreciated, and we have been waiting for this</p>
             <p>A huge part of the audio api is processing data - audio data. If we do this on the main thread other things get in the way - and the way the audio api fixes this is by skipping. The ear does not like things going out of sync.</p>
@@ -411,7 +440,14 @@ canvas.transferFromImageBitmap(bitmap);
         </section>
 
         <section data-background-color="#acc486" data-background-image="media/lemScoop.gif">
-          <h1>Demo</h1>
+          <h1>Simple Demo</h1>
+          <aside class="notes">
+            <p>Only works in canary</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#acc486" data-background-image="media/lemScoop.gif">
+          <h1>Complex Demo</h1>
           <aside class="notes">
             <p>Only works in canary</p>
           </aside>
@@ -429,16 +465,19 @@ canvas.transferFromImageBitmap(bitmap);
         <section data-background-color="#8c4c6f" data-background-image="media/livejs.jpg" >
           <h1>It's all interesting</h1>
           <aside class="notes">
-            <p></p>
+            <p>Why do I care?</p>
+            <p>I wrote/write a piece of audiovisualisation software (all in js, all in the browser) - that's a different talk, you can find that online - however I was playing a gig in budapest about 6 months ago and my software crashed live and I had to reboot.</p>
+            <p>Now I only run a macbook - it's not even a pro - but it got me interested</p>
           </aside>
         </section>
 
         <section data-background-color="#8c4c6f" data-background-image="media/asia.jpg" >
           <h1></h1>
           <aside class="notes">
-            <p>I started down this path because I have a piece of software which I use to run visuals. It's all run locally, but it's written in JS - so I can control the functionality I have</p>
-            <p>I've run into performance problems - like big ones. I'm analysing audio, re-analysing, I'm redrawing.</p>
+            <p>I'm analysing audio, re-analysing, I'm redrawing.</p>
             <p>I'm really interested in the media side of it</p>
+            <p>We're live js - we just opened js conf eu - and I've literally just implemented one worker so far and everything is much better - I think chrome has taken 2d canvas onto the gpu - but it's all gravy</p>
+            <p>Whatever you use it for - just like es6 modules, it's going to shake up the way we architect applications</p>
           </aside>
         </section>
 
