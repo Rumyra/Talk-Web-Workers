@@ -12,7 +12,7 @@ onmessage = function(e) {
 }
 
 // I kinda want to pass in the amount of array leaps we make considering we know the original array is 1024 and the array we want is 64
-const shapeCount = 32; // size of new array
+const shapeCount = 64; // size of new array
 function alterArr(arrToChange) {
 
   arrToChange.slice(0, (arrToChange.length / 2) ); // pull off first 10khz freqs

@@ -183,6 +183,14 @@ let analyserNode = new AnalyserNode(audioCtx, {
           </aside>
         </section>
 
+        <section data-background-color="#acc486" data-background-image="media/etsy.jpg">
+          <h1>Code Keyrings: SOTB18</h1>
+          <h3><a href="https://www.etsy.com/uk/shop/MadeByRumyra?ref=seller-platform-mcnav">etsy.com/uk/shop/MadeByRumyra</a></h3>
+          <aside class="notes">
+            <p>Shameless plug - I sell laser cut code keyrings - please buy one, it means I can buy food</p>
+          </aside>
+        </section>
+
         <section data-background-color="#ea8d88" data-background-video="media/lemSin.mov">
           <h1>Web Workers</h1>
           <aside class="notes">
@@ -217,6 +225,7 @@ let analyserNode = new AnalyserNode(audioCtx, {
         </section>
 
         <section data-background-color="#ea8d88">
+          <h1>Code!</h1>
             <pre><code data-trim class="js">// create a worker
 var myWorker = new Worker('worker.js');
             </code></pre>
@@ -337,10 +346,10 @@ myWorker.addEventListener('message', function(e) {
         </section>
 
         <section data-background-color="#ea8d88">
-          <h1>What??</h1>
+          <h1>What Data Tho??</h1>
           <h3>Data: Copied</h3>
           <h3>Transferable</h3>
-          <h3>Shared</h3>
+          <h3>SharedArrayBuffer</h3>
           <h3><a href="http://lucasfcosta.com/2017/04/30/JavaScript-From-Workers-to-Shared-Memory.html">http://lucasfcosta.com/2017/04/30/JavaScript-From-Workers-to-Shared-Memory.html</a></h3>
           <aside class="notes">
             <p>So in our example the data is copied over the worker.</p>
@@ -349,7 +358,7 @@ myWorker.addEventListener('message', function(e) {
         </section>
 
         <section data-background-color="#ea8d88">
-          <h1>Listen for the data</h1>
+          <h1>Transferrable</h1>
             <pre><code data-trim class="js">// transfer the data purlese
 myWorker.postMessage(bigData, [bigData]);
             </code></pre>
@@ -359,7 +368,7 @@ myWorker.postMessage(bigData, [bigData]);
           </aside>
         </section>
 
-        <section data-background-color="#ea8d88">
+        <section data-background-color="#ea8d88" data-background-image="media/lemShrug.gif" data-state="no-visuals">
           <h1>sharedArrayBuffer</h1>
             <!-- <pre><code data-trim class="js">// transfer the data purlese
 myWorker.postMessage(bigData, [bigData]);
@@ -370,30 +379,29 @@ myWorker.postMessage(bigData, [bigData]);
           </aside>
         </section>
 
-        <section data-background-color="#ea8d88">
-          <h1>Visual without reanalysis</h1>
+        <section data-background-color="#ea8d88"  data-state="hexTwo">
           <aside class="notes">
             <p>Pretty simple to say you want to transfer the data</p>
             <p>When you post the message just pass in the data you want to make transferable with an array as an argument, like thus</p>
           </aside>
         </section>
 
-        <section data-background-color="#ea8d88" data-background-image="media/lemAxe.gif">
+        <section data-background-color="#ea8d88" data-background-image="media/lemAxe.gif"  data-state="no-visuals">
           <h1>COMPLEX DEMO</h1>
+          <h3><a href="https://codepen.io/Rumyra/project/editor/ZznoOE">https://codepen.io/Rumyra/project/editor/ZznoOE</a></h3>
           <aside class="notes">
             <p></p>
           </aside>
         </section>
 
-        <section data-background-color="#ea8d88">
-          <h1>Visual with reanalysis</h1>
+        <section data-background-color="#ea8d88"  data-state="hex">
           <aside class="notes">
             <p>Pretty simple to say you want to transfer the data</p>
             <p>When you post the message just pass in the data you want to make transferable with an array as an argument, like thus</p>
           </aside>
         </section>
 
-        <section data-background-color="#acc486">
+        <section data-background-color="#acc486"  data-state="no-visuals">
           <h1>Worklets</h1>
           <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Yup, that&#39;s right - basically worklets allow us to run something within a stage of a browser engine, and make sure developers can&#39;t access something that will make the world explode. It also allows us to do a few optimizations if needed, i.e. run on different thread, caching, etc</p>&mdash; Ian Kilpatrick (@bfgeek) <a href="https://twitter.com/bfgeek/status/956245937390628864?ref_src=twsrc%5Etfw">January 24, 2018</a></blockquote>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -404,7 +412,7 @@ myWorker.postMessage(bigData, [bigData]);
         </section>
 
         <section data-background-color="#acc486">
-          <h1>CSS Paint API</h1>
+          <h1>CSS Houdini</h1>
           <h3><a href="https://houdini.glitch.me/">Spellbook</a></h3>
           <aside class="notes">
             <p>So this is all part of a bigger spec coming out called Houdini - it basically gives developers lower level access to CSS and the underlying technologies</p>
@@ -430,6 +438,7 @@ CSS.paintWorklet.addModule('scripts/spiral-orig.js');
 
         <section data-background-color="#acc486" data-background-image="media/lemBuild.gif">
           <h1>Simple Demo</h1>
+          <h3><a href="https://codepen.io/Rumyra/project/editor/DKVagG">https://codepen.io/Rumyra/project/editor/DKVagG</a></h3>
           <aside class="notes">
             <p>Explain</p>
           </aside>
@@ -437,13 +446,14 @@ CSS.paintWorklet.addModule('scripts/spiral-orig.js');
 
         <section data-background-color="#acc486" data-background-image="media/lemBuild.gif">
           <h1>Less Simple Demo</h1>
+          <h3><a href="https://codepen.io/Rumyra/project/editor/ZMKGzv">https://codepen.io/Rumyra/project/editor/ZMKGzv</a></h3>
           <aside class="notes">
             <p>Works in Chrome</p>
           </aside>
         </section>
 
         <section data-background-color="#acc486">
-          <h1>Web Audio Workets</h1>
+          <h1>Web Audio Worklets</h1>
           <p>Put some code here</p>
           <aside class="notes">
             <p>So for as long as the Web Audio API specification has been out we've had this script processor node right - which has been depreciated, and we have been waiting for this</p>
@@ -485,6 +495,7 @@ canvas.transferFromImageBitmap(bitmap);
 
         <section data-background-color="#acc486" data-background-image="media/lemScoop.gif">
           <h1>Simple Demo</h1>
+          <h3><a href="https://codepen.io/Rumyra/pen/NzOBNr?editors=0110">https://codepen.io/Rumyra/pen/NzOBNr?editors=0110</a></h3>
           <aside class="notes">
             <p>Only works in canary</p>
           </aside>
@@ -492,6 +503,7 @@ canvas.transferFromImageBitmap(bitmap);
 
         <section data-background-color="#acc486" data-background-image="media/lemScoop.gif">
           <h1>Complex Demo</h1>
+          <h3><a href="https://codepen.io/Rumyra/project/editor/AOzEPP">https://codepen.io/Rumyra/project/editor/AOzEPP</a></h3>
           <aside class="notes">
             <p>Only works in canary</p>
           </aside>
@@ -513,14 +525,15 @@ canvas.transferFromImageBitmap(bitmap);
           </aside>
         </section>
 
-        <section data-background-color="#8c4c6f" data-background-image="media/livejs.jpg" >
+        <section data-background-color="#8c4c6f" data-background-video="media/vjotg.mp4" >
           <h1>Ada and I</h1>
+          <h2>VJ-OTG</h2>
           <aside class="notes">
             <p>Whatever you use it for - just like es6 modules, it's going to shake up the way we architect applications</p>
           </aside>
         </section>
 
-        <section data-background-color="#8c4c6f" data-background-image="media/livejs.jpg" >
+        <section data-background-color="#8c4c6f">
           <h1>The Demos</h1>
           <h3>https://codepen.io/Rumyra</h3>
           <aside class="notes">

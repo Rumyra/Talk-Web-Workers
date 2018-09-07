@@ -80,6 +80,7 @@ console.log(canvas);
 canvas.width = dimensions.width;
 canvas.height = dimensions.height;
 let ctx = canvas.getContext('2d');
+ctx.lineWidth = 4;
 
 // audio api stuff
 const audioCtx = new AudioContext;
@@ -109,16 +110,24 @@ function getStreamData() {
       source.connect(analyserNode);
     });
 }
-Reveal.addEventListener('hex', function(ev) {
-  screen.style.display = 'block';
-  getStreamData().then(render);
-})
 
 // set which animation to show
 let currentAnimation = 'hex',
   renderFrame = true,
   useWorker = true;
 
+Reveal.addEventListener('hex', function(ev) {
+  screen.style.display = 'block';
+  useWorker = true;
+  getStreamData().then(render);
+})
+Reveal.addEventListener('hexTwo', function(ev) {
+  screen.style.display = 'block';
+  useWorker = false;
+  getStreamData().then(render);
+})
+
+let badData = [];
 function render() {
   requestAnimationFrame(render);
 
@@ -127,6 +136,9 @@ function render() {
 
     // get frequency data
     analyserNode.getByteFrequencyData(receivedData);
+    for (let j=0; j<receivedData.length; j+=64) {
+      badData.push(receivedData[j]);
+    }
     // console.log(receivedData);
 
     if (useWorker) {
@@ -136,7 +148,7 @@ function render() {
       }
       drawHex(newFreqs);
     } else {
-      drawHex(receivedData);
+      drawHex(badData);
     }
 
   } else {
@@ -145,15 +157,20 @@ function render() {
 
 }
 
+let xGap = Math.floor(dimensions.width/10);
+let yGap = Math.floor(dimensions.height/6);
+console.log(xGap, yGap);
+
 // visual functions
 let drawHex = function(freqs) {
+  const total = 60;
   ctx.clearRect(0, 0, dimensions.width, dimensions.height);
-  for (let i = 0; i < freqs.length; i++) {
+  for (let i = 0; i < total; i++) {
     var d = freqs[i];
 
-    drawHexagon(ctx, d, i*80, i*50);
-    ctx.strokeStyle = "hsla("+(i*10+100)+",60%,80%,1)";
-    ctx.fillStyle = "hsla("+(i*10+100)+",60%,80%,0.8)";
+    drawHexagon(ctx, d, ((i%10)*xGap)+xGap/2, (Math.floor(i/10)*yGap)+yGap/2);
+    ctx.strokeStyle = "hsla("+(i*10+100)+",60%,60%,1)";
+    ctx.fillStyle = "hsla("+(i*10+100)+",60%,60%,0.5)";
     // ctx.arc(x, y, d/(j*5), 0, Math.PI*2);
     ctx.fill();
     ctx.stroke();
