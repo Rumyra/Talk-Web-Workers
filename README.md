@@ -24,6 +24,10 @@ For each conference I branch, so just choose the correct branch for the correct 
 
 ## Examples referenced within the talk
 
+### Codepen Demos
+
+- [The whole list of demos can be found here](https://codepen.io/Rumyra/pen/PaBXdX?editors=1000)
+
 ### Workers
 
 - [What is available in a worker](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Functions_and_classes_available_to_workers)
