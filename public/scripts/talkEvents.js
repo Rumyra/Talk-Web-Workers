@@ -3,6 +3,15 @@ navigator.serviceWorker.getRegistrations().then(function(registrations) {
   registration.unregister()
 } });
 
+const dimensions = {
+  width: window.innerWidth,
+  height: window.innerHeight,
+  centerX: window.innerWidth/2,
+  centerY: window.innerHeight/2,
+  maxRadius: (window.innerHeight-(window.innerWidth/6))/2,
+  minRadius: (window.innerHeight/10)/2
+};
+
 // initialise Reveal
 Reveal.initialize({
 
@@ -62,4 +71,141 @@ Reveal.initialize({
   parallaxBackgroundVertical: ''
 
 });
+
+// instigate canvas
+const screen = document.getElementById('screen');
+const canvas = document.createElement('canvas');
+screen.appendChild(canvas);
+console.log(canvas);
+canvas.width = dimensions.width;
+canvas.height = dimensions.height;
+let ctx = canvas.getContext('2d');
+ctx.lineWidth = 4;
+
+// audio api stuff
+const audioCtx = new AudioContext;
+const freqSampleSize = 1024;
+let analyserNode = new AnalyserNode(audioCtx, {
+  fftSize: freqSampleSize*2,
+  maxDecibels: -30,
+  minDecibels: -100,
+  smoothingTimeConstant: 0.8
+});
+
+// create an array for received analysis data to be stored
+var receivedData = new Uint8Array(freqSampleSize);
+
+// worker stuff
+const analysisWorker = new Worker('scripts/w_analyser.js');
+// put message sending into a function, just to make sure it happens after we receive data...
+function sendMessageToWorker() {
+  analysisWorker.postMessage({'freqs': receivedData, 'count': freqSampleSize});
+}
+
+function getStreamData() {
+  // pipe in analysing to getUserMedia
+  return navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+    .then(stream => audioCtx.createMediaStreamSource(stream))
+    .then(source => {
+      source.connect(analyserNode);
+    });
+}
+
+// set which animation to show
+let currentAnimation = 'hex',
+  renderFrame = true,
+  useWorker = true;
+
+Reveal.addEventListener('hex', function(ev) {
+  screen.style.display = 'block';
+  useWorker = true;
+  getStreamData().then(render);
+})
+Reveal.addEventListener('hexTwo', function(ev) {
+  screen.style.display = 'block';
+  useWorker = false;
+  getStreamData().then(render);
+})
+
+let badData = [];
+function render() {
+  requestAnimationFrame(render);
+
+  if (renderFrame) {
+    renderFrame = false;
+
+    // get frequency data
+    analyserNode.getByteFrequencyData(receivedData);
+    for (let j=0; j<receivedData.length; j+=64) {
+      badData.push(receivedData[j]);
+    }
+    // console.log(receivedData);
+
+    if (useWorker) {
+      sendMessageToWorker();
+      analysisWorker.onmessage = function(e) {
+        newFreqs = e.data;
+      }
+      drawHex(newFreqs);
+    } else {
+      drawHex(badData);
+    }
+
+  } else {
+    renderFrame = true;
+  }
+
+}
+
+let xGap = Math.floor(dimensions.width/10);
+let yGap = Math.floor(dimensions.height/6);
+console.log(xGap, yGap);
+
+// visual functions
+let drawHex = function(freqs) {
+  const total = 60;
+  ctx.clearRect(0, 0, dimensions.width, dimensions.height);
+  for (let i = 0; i < total; i++) {
+    var d = freqs[i];
+
+    drawHexagon(ctx, d, ((i%10)*xGap)+xGap/2, (Math.floor(i/10)*yGap)+yGap/2);
+    ctx.strokeStyle = "hsla("+(i*10+100)+",60%,60%,1)";
+    ctx.fillStyle = "hsla("+(i*10+100)+",60%,60%,0.5)";
+    // ctx.arc(x, y, d/(j*5), 0, Math.PI*2);
+    ctx.fill();
+    ctx.stroke();
+  }
+
+}
+
+Math.radians = function(degrees) {
+  return degrees * Math.PI / 180;
+};
+
+function drawHexagon(ctx, sideLength, startX, startY) {
+
+  // maths mother fucker
+  const moveX = Math.sin(Math.radians(30))*sideLength;
+  const moveY = Math.cos(Math.radians(30))*sideLength;
+
+  // I actually want the origin to be in the centre
+  var startX = startX-(sideLength/2);
+  var startY = startY-moveY;
+
+  ctx.beginPath(); // instigate
+  ctx.moveTo(startX, startY); // start at pos
+  ctx.lineTo(startX+sideLength, startY); // go right along top (we're drawing clockwise from top left)
+
+  ctx.lineTo(startX+sideLength+moveX, startY+moveY);
+  ctx.lineTo(startX+sideLength, startY+(moveY*2));
+  ctx.lineTo(startX, startY+(moveY*2));
+  ctx.lineTo(startX-moveX, startY+moveY);
+  ctx.lineTo(startX, startY);
+  ctx.closePath();
+}
+
+
+Reveal.addEventListener( 'no-visuals', function() {
+  screen.style.display = 'none';
+}, false);
 

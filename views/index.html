@@ -36,6 +36,7 @@
     svg {width: 100vw; height: 100vh; padding:0px; margin:0px;}
     .reveal h3 a {color:#8c4c6f;}
     .reveal h3 a:hover {color:#acc486;}
+    .reveal h3 a:visited {color:#8c4c6f;}
   </style>
 
 </head>
@@ -57,97 +58,138 @@ $grey: #bebebe
     <div class="slides">
       <section>
 
+        <section data-background-color="#8c4c6f" data-state="no-visuals">
+          <h1>How To Be A Web AV Artist: Part 2</h1>
+          <p>Ruth John&nbsp;&nbsp;|&nbsp;&nbsp;@Rumyra</p>
+          <aside class="notes">
+            <p>State of the Browser!! Hello!</p>
+            <p>So lovely to be back - I think last time I was here I was in the first few experiments to analysing audio and mixing video elements and using a games controller</p>
+          </aside>
+        </section>
+
+        <!-- hex one -->
+        <section data-background-color="#8c4c6f" data-state="hex">
+          <audio src="media/llcool.mp3" data-autoplay id="warren"></audio>
+          <h1>Cool intro slide</h1>
+          <p>Ruth John&nbsp;&nbsp;|&nbsp;&nbsp;@Rumyra</p>
+          <aside class="notes">
+          </aside>
+        </section>
+
+        <section data-background-color="#8c4c6f" data-state="no-visuals">
+          <h1>How To Be A Web AV Artist: Part 2</h1>
+          <p>Ruth John&nbsp;&nbsp;|&nbsp;&nbsp;@Rumyra</p>
+          <aside class="notes">
+            <p>State of the Browser!! Hello!</p>
+            <p>So lovely to be back - I think last time I was here I was in the first few experiments to analysing audio and mixing video elements and using a games controller</p>
+          </aside>
+        </section>
+
         <section data-background-color="#8c4c6f">
+          <h1>Nothing has changed</h1>
+          <h2 class="fragment fade-in">Everything has changed</h2>
+          <aside class="notes">
+            <p>No in all seriousness, everything has changed. In the past few years I've gone from creating, somewhat tripe, demos on stage, to playing full blown gigs.</p>
+            <p>This was last weekend at EMF, it wasn't planned, but they needed someone to do visuals and I can do that. I mean this guy has a keytar - it's serious.</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#eee5c4" data-background-image="media/things.gif">
+          <h1>Missed it?</h1>
+          <aside class="notes">
+            <p>For those of you that have missed my life up until now - entirely possible</p>
+            <p>Here's the run down</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#8c4c6f">
+          <h1>Get sound</h1>
+          <pre><code data-trim class="js">const audioCtx = new AudioContext;
+
+function getStreamData() {
+  return navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+    .then(stream => audioCtx.createMediaStreamSource(stream))
+    .then(source => {
+      source.connect(analyserNode);
+    });
+}
+</code></pre>
+          <aside class="notes">
+            <p>So we can get sound via a media element, via a sound file, we can create sound - or here I'm streaming it via the mic</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#8c4c6f">
+          <h1>Analyse that sound</h1>
+          <pre><code data-trim class="js">
+const freqSampleSize = 1024;
+
+let analyserNode = new AnalyserNode(audioCtx, {
+  fftSize: freqSampleSize*2,
+  maxDecibels: -30,
+  minDecibels: -100,
+  smoothingTimeConstant: 0.8
+});
+            </code></pre>
+          <aside class="notes">
+            <p>Then I'm creating an analyser node - this is all via new and shiny methods by the way</p>
+            <p>This returns an array of gain values of frequencies low to high</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#8c4c6f">
+          <h1>What?</h1>
+          <h2 class="fragment fade-in">[24, 67, 15, 78, 104, 207, 136, 45, 52, 27, 18, 3, 6, 1, 0, 0, 0, 0, 0, 0, 0]</h2>
+          <aside class="notes">
+            <p>We then use that data to make visuals</p>
+            <p>Bear in mind this is all browser apis - this is all native js - we can...</p>
+            <p>Change the height of DOM elements</p>
+            <p>Animate SVGs</p>
+            <p>Which I did and I spoke about</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#eee5c4" data-background-image="media/asia.jpg">
+          <h1>Gigs...</h1>
+          <h2 class="fragment fade-in">Performance</h2>
+          <aside class="notes">
+            <p>I moved my entire piece of software over to use a canvas based visualisation system</p>
+            <p>It was cleaner, faster and could deal with a lot more processing going on behind the scenes - or so I thought</p>
+            <p>In November last year my software crashed life on stage - top tip keep your background something you don't mind showing and know your keyboard shortcuts!</p>
+          </aside>
+        </section>
+
+        <!-- so this is actually a talk about: -->
+        <section data-background-color="#acc486">
+          <h1>One weird trick to being a Web AV Artist</h1>
+          <p>Ruth John&nbsp;&nbsp;|&nbsp;&nbsp;@Rumyra</p>
+          <aside class="notes">
+          </aside>
+        </section>
+
+        <section data-background-color="#acc486">
           <h1>Web Workers & Worklets</h1>
           <p>Ruth John&nbsp;&nbsp;|&nbsp;&nbsp;@Rumyra</p>
           <aside class="notes">
           </aside>
         </section>
 
-        <section data-background-color="#8c4c6f">
+        <section data-background-color="#acc486">
           <h1>Ruth John&nbsp;&nbsp;|&nbsp;&nbsp;@Rumyra</h1>
           <p>Hello</p>
           <aside class="notes">
-            <p>Hey everyone - I don't need to intro myself too much - you all know me from places such as...</p>
+            <p>Hello everyone, let me introduce myself</p>
+            <p>My name is Ruth and I do things with a browser that you really should not be allowed to do - then browsers give me functionality which enables me to do it betterer</p>
           </aside>
         </section>
 
-        <section data-background-color="#8c4c6f" data-background-image="media/slack.png">
-          <h1>Ruth John&nbsp;&nbsp;|&nbsp;&nbsp;@Rumyra</h1>
-          <p>Hello</p>
+        <section data-background-color="#acc486" data-background-image="media/etsy.jpg">
+          <h1>Code Keyrings: SOTB18</h1>
+          <h3><a href="https://www.etsy.com/uk/shop/MadeByRumyra?ref=seller-platform-mcnav">etsy.com/uk/shop/MadeByRumyra</a></h3>
           <aside class="notes">
-            <p>Digital Oxford, jsoxford slack channel</p>
+            <p>Shameless plug - I sell laser cut code keyrings - please buy one, it means I can buy food</p>
           </aside>
         </section>
-
-        <section data-background-color="#8c4c6f" data-background-image="media/summer.png">
-          <h1>Ruth John&nbsp;&nbsp;|&nbsp;&nbsp;@Rumyra</h1>
-          <p>Hello</p>
-          <aside class="notes">
-            <p>js oxford summer of hacks</p>
-          </aside>
-        </section>
-
-        <section data-background-color="#8c4c6f" data-background-image="media/gh.png">
-          <h1>Ruth John&nbsp;&nbsp;|&nbsp;&nbsp;@Rumyra</h1>
-          <p>Hello</p>
-          <aside class="notes">
-            <p>Well named pull requests on jsoxford website</p>
-          </aside>
-        </section>
-
-        <section data-background-color="#8c4c6f">
-          <h1>Ruth John&nbsp;&nbsp;|&nbsp;&nbsp;@Rumyra</h1>
-          <p>Creative Engineer</p>
-          <p>~ 15 Years</p>
-          <p>Google Developer Expert</p>
-          <aside class="notes">
-            <p>I'm a creative engineer, legacy web dev. I've been doing this for about 15 years</p>
-            <p>I'm a recognised Google Developer Expert in browser stuff and specifically audio and midi</p>
-            <p>I work for myself - always on the look out for new projects</p>
-          </aside>
-        </section>
-
-        <section data-background-color="#8c4c6f">
-          <h1>Thanks for having me</h1>
-          <img src="media/jo.jpg" />
-          <img src="media/me.jpg" />
-          <aside class="notes">
-            <p>It is wonderful to be talking along side Jo this evening... for a number of reasons but one because:</p>
-          </aside>
-        </section>
-
-        <section data-background-color="#eee5c4" data-background-image="media/seren.png">
-          <aside class="notes">
-            <p>I know the organisers did not plan to have a IWD themed jsoxford, which is the best thing. That the community here didn't try. I think this is the first meetup I have spoken at with an all female line up at IWD where it was natural.</p>
-            <p>That, that's what it is about. That this is normal!</p>
-          </aside>
-        </section>
-
-        <section data-background-color="#ea8d88">
-          <h1>Web Workers</h1>
-          <h2>Full Disclosure</h2>
-          <aside class="notes">
-            <p>Longest intro ever!</p>
-            <p>Web workers! yeah... let's start with the what, then the how, then what I really want to talk about which is owrkers in other specs.</p>
-            <p>This is a brand new talk - I have never done it before, it is a first version so it is not a shiny end conference talk.</p>
-            <p>I would luv afterwards (no q&a) afterwards to take feedback. What did you like, what didn't you like, could I have explained something better, was there anything you didn't understand</p>
-            <p>Don't be scared I won't share that feedback, I will merely edit this talk</p>
-          </aside>
-        </section>
-
-        <section data-background-color="#ea8d88" data-background-image="media/lemWalk.gif">
-          <aside class="notes">
-            <p>Cool</p>
-          </aside>
-        </section>
-
-        <!-- <section data-background-color="#ea8d88">
-          <h1>Web Workers</h1>
-          <aside class="notes">
-
-          </aside>
-        </section> -->
 
         <section data-background-color="#ea8d88" data-background-video="media/lemSin.mov">
           <h1>Web Workers</h1>
@@ -162,7 +204,7 @@ $grey: #bebebe
           <h1>Web Workers</h1>
           <aside class="notes">
             <p>Wouldn't it be cool if whilst that was going on, some of the things the browser had to do could happen else where, whilst the browser was still doing it's work.</p>
-            <p>Seperately and at the same time</p>
+            <p>Separately and at the same time</p>
             <p>That's what a web worker is - it take processing off the main thread, and puts it on another.</p>
             <p>Makes it multi threaded</p>
             <p>Now we'll talk about problems in a minute but let's take a look at how it works</p>
@@ -183,11 +225,12 @@ $grey: #bebebe
         </section>
 
         <section data-background-color="#ea8d88">
+          <h1>Code!</h1>
             <pre><code data-trim class="js">// create a worker
 var myWorker = new Worker('worker.js');
             </code></pre>
           <aside class="notes">
-            <p></p>
+            <p>So let's create a worker within out main javascript</p>
           </aside>
         </section>
 
@@ -201,6 +244,7 @@ var myWorker = new Worker('worker.js');
           <h3 class="fragment fade-in">Import scripts & create other workers</h3>
           <h3 class="fragment fade-in">List: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Functions_and_classes_available_to_workers">https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Functions_and_classes_available_to_workers</a></h3>
           <aside class="notes">
+            <p>It's all about not directly affecting the main page with a worker so...</p>
             <p>This means that window, navigator and parent objects are not available (self is)</p>
             <p>Neither is the DOM it is not thread safe</p>
             <p>But there is limited access to other APIs and methods</p>
@@ -272,6 +316,8 @@ self.addEventListener('message', function(e) {
   // send a message back
   self.postMessage('Hey main');
 }, false);
+
+// We could do self.onmessage('Hey worker' function...)
             </code></pre>
           <aside class="notes">
             <p>OK so we not only have to give the worker data but we also have to start it - this happens with the same thing - postmessage method</p>
@@ -292,59 +338,86 @@ myWorker.addEventListener('message', function(e) {
         </section>
 
         <section data-background-color="#ea8d88" data-background-image="media/lemAxe.gif">
-          <h1>DEMO</h1>
+          <h1>SIMPLE DEMO</h1>
+          <h3><a href="https://codepen.io/Rumyra/project/editor/DvLjgn">https://codepen.io/Rumyra/project/editor/DvLjgn</a></h3>
           <aside class="notes">
             <p></p>
           </aside>
         </section>
 
         <section data-background-color="#ea8d88">
-          <h1>Where would you use this?</h1>
-          <h3><a href="https://restaurantmenubuilder.com/">https://restaurantmenubuilder.com/</a></h3>
-          <h3>By <a href="https://twitter.com/Tevko">https://twitter.com/Tevko</a></h3>
-          <aside class="notes">
-            <p></p>
-          </aside>
-        </section>
-
-        <section data-background-color="#ea8d88">
-          <h1>Maths!</h1>
-          <h3><a href="https://afshinm.github.io/50k/">https://afshinm.github.io/50k/</a></h3>
-          <aside class="notes">
-            <p></p>
-          </aside>
-        </section>
-
-        <section data-background-color="#ea8d88">
-          <h1>What??</h1>
+          <h1>What Data Tho??</h1>
           <h3>Data: Copied</h3>
           <h3>Transferable</h3>
-          <h3>Shared</h3>
+          <h3>SharedArrayBuffer</h3>
           <h3><a href="http://lucasfcosta.com/2017/04/30/JavaScript-From-Workers-to-Shared-Memory.html">http://lucasfcosta.com/2017/04/30/JavaScript-From-Workers-to-Shared-Memory.html</a></h3>
+          <aside class="notes">
+            <p>So in our example the data is copied over the worker.</p>
+            <p>You can transfer it, so the data isn't available on the main thread whilst it's in the worker. This improves performance with large data sets - we're talking megabytes of data, otherwise loosing the data from the main thread needs to be carefully considered.</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#ea8d88">
+          <h1>Transferrable</h1>
+            <pre><code data-trim class="js">// transfer the data purlese
+myWorker.postMessage(bigData, [bigData]);
+            </code></pre>
+          <aside class="notes">
+            <p>Pretty simple to say you want to transfer the data</p>
+            <p>When you post the message just pass in the data you want to make transferable with an array as an argument, like thus</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#ea8d88" data-background-image="media/lemShrug.gif" data-state="no-visuals">
+          <h1>sharedArrayBuffer</h1>
+            <!-- <pre><code data-trim class="js">// transfer the data purlese
+myWorker.postMessage(bigData, [bigData]);
+            </code></pre> -->
+          <aside class="notes">
+            <p>SharedArrayBuffer - ah the fire - so this was pulled because of spectre. It is available in Chrome 67 & I belive the latest FF behind flags.</p>
+            <p>Basically it's shared data, so multiple threads can see it. Main or workers - remember workers can talk to each other</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#ea8d88"  data-state="hexTwo">
+          <aside class="notes">
+            <p>Pretty simple to say you want to transfer the data</p>
+            <p>When you post the message just pass in the data you want to make transferable with an array as an argument, like thus</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#ea8d88" data-background-image="media/lemAxe.gif"  data-state="no-visuals">
+          <h1>COMPLEX DEMO</h1>
+          <h3><a href="https://codepen.io/Rumyra/project/editor/ZznoOE">https://codepen.io/Rumyra/project/editor/ZznoOE</a></h3>
           <aside class="notes">
             <p></p>
           </aside>
         </section>
 
-        <section data-background-color="#ea8d88">
-          <h1>Resources</h1>
-          <h3><a href="https://github.com/GoogleChromeLabs/comlink">https://github.com/GoogleChromeLabs/comlink</a></h3>
-          <h3><a href="https://github.com/GoogleChromeLabs/clooney">https://github.com/GoogleChromeLabs/clooney</a></h3>
-          <h3><a href="https://medium.com/@JoubranJad/running-fetch-in-a-web-worker-700dc33ac854">https://medium.com/@JoubranJad/running-fetch-in-a-web-worker-700dc33ac854</a></h3>
+        <section data-background-color="#ea8d88"  data-state="hex">
           <aside class="notes">
-            <p>comlink aims to make the post message stuff more useable - rather than just writing post message all the time you can share vars</p>
-            <p>classes given to clooney will be instantiated and run inside a worker - class can not rely on it's surrounding scope -> could change workers are looking to support es6 modules</p>
-            <p>Running fetch in a worker - seems superfluous but there's an example none the less</p>
+            <p>Pretty simple to say you want to transfer the data</p>
+            <p>When you post the message just pass in the data you want to make transferable with an array as an argument, like thus</p>
           </aside>
         </section>
 
-        <section data-background-color="#acc486">
+        <section data-background-color="#acc486"  data-state="no-visuals">
           <h1>Worklets</h1>
           <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Yup, that&#39;s right - basically worklets allow us to run something within a stage of a browser engine, and make sure developers can&#39;t access something that will make the world explode. It also allows us to do a few optimizations if needed, i.e. run on different thread, caching, etc</p>&mdash; Ian Kilpatrick (@bfgeek) <a href="https://twitter.com/bfgeek/status/956245937390628864?ref_src=twsrc%5Etfw">January 24, 2018</a></blockquote>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
           <aside class="notes">
             <p>Now they all work in a similar way and actually one of the reasons it took 5 years for the audio worklet was because of houdini</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#acc486">
+          <h1>CSS Houdini</h1>
+          <h3><a href="https://houdini.glitch.me/">Spellbook</a></h3>
+          <aside class="notes">
+            <p>So this is all part of a bigger spec coming out called Houdini - it basically gives developers lower level access to CSS and the underlying technologies</p>
+            <p>So instead of the constraints of say flexbox - you can create your own flexbox. If you're not happy with the fact conic gradient isn't well supported yet, you can make it.</p>
+            <p>Very new, very experimental, will change</p>
           </aside>
         </section>
 
@@ -357,21 +430,30 @@ myWorker.addEventListener('message', function(e) {
 CSS.paintWorklet.addModule('scripts/spiral-orig.js');
             </code></pre>
           <aside class="notes">
-            <p>So this is all part of a bigger spec coming out called Houdini - it basically gives dveelopers lower level access to CSS</p>
+            <p>So this is all part of a bigger spec coming out called Houdini - it basically gives developers lower level access to CSS</p>
             <p>In this case - this particular bit gives us the ability to paint a background - so we draw it on canvas and then push it as a background image to the css</p>
             <p>Only works in canary</p>
           </aside>
         </section>
 
         <section data-background-color="#acc486" data-background-image="media/lemBuild.gif">
-          <h1>Demo</h1>
+          <h1>Simple Demo</h1>
+          <h3><a href="https://codepen.io/Rumyra/project/editor/DKVagG">https://codepen.io/Rumyra/project/editor/DKVagG</a></h3>
           <aside class="notes">
-            <p>Only works in canary</p>
+            <p>Explain</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#acc486" data-background-image="media/lemBuild.gif">
+          <h1>Less Simple Demo</h1>
+          <h3><a href="https://codepen.io/Rumyra/project/editor/ZMKGzv">https://codepen.io/Rumyra/project/editor/ZMKGzv</a></h3>
+          <aside class="notes">
+            <p>Works in Chrome</p>
           </aside>
         </section>
 
         <section data-background-color="#acc486">
-          <h1>Web Audio Workets</h1>
+          <h1>Web Audio Worklets</h1>
           <p>Put some code here</p>
           <aside class="notes">
             <p>So for as long as the Web Audio API specification has been out we've had this script processor node right - which has been depreciated, and we have been waiting for this</p>
@@ -383,6 +465,7 @@ CSS.paintWorklet.addModule('scripts/spiral-orig.js');
         <section data-background-color="#acc486" data-background-image="media/lemClimb.gif">
           <h1>Demo</h1>
           <h3><a href="https://googlechromelabs.github.io/web-audio-samples/audio-worklet/">https://googlechromelabs.github.io/web-audio-samples/audio-worklet/</a></h3>
+          <h3><a href="https://dsp.audio/editor/">https://dsp.audio/editor/</a></h3>
           <aside class="notes">
             <p>So for as long as the Web Audio API specification has been out we've had this script processor node right - which has been depreciated, and we have been waiting for this</p>
             <p>A huge part of the audio api is processing data - audio data. If we do this on the main thread other things get in the way - and the way the audio api fixes this is by skipping. The ear does not like things going out of sync.</p>
@@ -411,7 +494,16 @@ canvas.transferFromImageBitmap(bitmap);
         </section>
 
         <section data-background-color="#acc486" data-background-image="media/lemScoop.gif">
-          <h1>Demo</h1>
+          <h1>Simple Demo</h1>
+          <h3><a href="https://codepen.io/Rumyra/pen/NzOBNr?editors=0110">https://codepen.io/Rumyra/pen/NzOBNr?editors=0110</a></h3>
+          <aside class="notes">
+            <p>Only works in canary</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#acc486" data-background-image="media/lemScoop.gif">
+          <h1>Complex Demo</h1>
+          <h3><a href="https://codepen.io/Rumyra/project/editor/AOzEPP">https://codepen.io/Rumyra/project/editor/AOzEPP</a></h3>
           <aside class="notes">
             <p>Only works in canary</p>
           </aside>
@@ -429,23 +521,29 @@ canvas.transferFromImageBitmap(bitmap);
         <section data-background-color="#8c4c6f" data-background-image="media/livejs.jpg" >
           <h1>It's all interesting</h1>
           <aside class="notes">
-            <p></p>
+            <p>Whatever you use it for - just like es6 modules, it's going to shake up the way we architect applications</p>
           </aside>
         </section>
 
-        <section data-background-color="#8c4c6f" data-background-image="media/asia.jpg" >
-          <h1></h1>
+        <section data-background-color="#8c4c6f" data-background-video="media/vjotg.mp4" >
+          <h1>Ada and I</h1>
+          <h2>VJ-OTG</h2>
           <aside class="notes">
-            <p>I started down this path because I have a piece of software which I use to run visuals. It's all run locally, but it's written in JS - so I can control the functionality I have</p>
-            <p>I've run into performance problems - like big ones. I'm analysing audio, re-analysing, I'm redrawing.</p>
-            <p>I'm really interested in the media side of it</p>
+            <p>Whatever you use it for - just like es6 modules, it's going to shake up the way we architect applications</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#8c4c6f">
+          <h1>The Demos</h1>
+          <h3>https://codepen.io/Rumyra</h3>
+          <aside class="notes">
+            <p>Whatever you use it for - just like es6 modules, it's going to shake up the way we architect applications</p>
           </aside>
         </section>
 
         <section data-background-color="#8c4c6f" data-background-image="media/lemBye.gif">
           <h1>Ruth John</h1>
           <h1>@Rumyra</h1>
-          <h3><a href="https://goo.gl/forms/YVgeXsg5L9DPdXy12">https://goo.gl/forms/YVgeXsg5L9DPdXy12</a></h3>
           <p>Thank You Very Much</p>
           <aside class="notes">
             <p>Thank you for bearing with - there's a feedback form - anonymous, can pop the link in slack. I would like to get feedback now before I take this talk further</p>
